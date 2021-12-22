@@ -1,0 +1,9 @@
+first:
+- one
+- two
+- three
+second: 373
+third:
+  '1': 100ˆ
+  '2': 200ˆ
+  '3': 300ˆ
