@@ -7,21 +7,33 @@ s.bind(('', 8888))
 s.listen(5)
 
 
-def resp_msg():
+def create_response_msg():
     response = {
         'response': '',
         'time': time.time(),
         'alert': 'Hello'
     }
+    return response
 
-    return json.dumps(response).encode('utf-8')
+
+def reform_response_msg():
+    return json.dumps(create_response_msg()).encode('utf-8')
+
+
+def send_server_response():
+    client.send(reform_response_msg())
+
+
+def receive_client_message():
+    client_msg = client.recv(1024)
+    return client_msg
 
 
 while True:
     client, addr = s.accept()
     print("Получен запрос на соединение от %s" % str(addr))
-    json_msg = client.recv(1024).decode('utf-8')
+    json_msg = receive_client_message().decode('utf-8')
     print(json_msg)
-    client.send(resp_msg())
+    send_server_response()
 
     client.close()
