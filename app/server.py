@@ -1,10 +1,14 @@
-from socket import *
+from socket import AF_INET, SOCK_STREAM, socket
 import time
 import json
+import logging
+import log.server_log_config
 
 s = socket(AF_INET, SOCK_STREAM)
 s.bind(('', 8888))
 s.listen(5)
+
+app_log = logging.getLogger('app')
 
 
 def create_response_msg():
@@ -31,7 +35,7 @@ def receive_client_message():
 
 while True:
     client, addr = s.accept()
-    print("Получен запрос на соединение от %s" % str(addr))
+    app_log.info("Получен запрос на соединение от %s" % str(addr))
     json_msg = receive_client_message().decode('utf-8')
     print(json_msg)
     send_server_response()

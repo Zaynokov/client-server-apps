@@ -1,0 +1,6 @@
+2022-01-06 17:55:04,260 INFO client Ответ сервера: {"response": "", "time": 1641480904.260921, "alert": "Hello"}
+2022-01-06 17:56:02,903 INFO client Ответ сервера: {"response": "", "time": 1641480962.903069, "alert": "Hello"}
+2022-01-06 17:56:12,156 INFO client Ответ сервера: {"response": "", "time": 1641480972.1567566, "alert": "Hello"}
+2022-01-06 17:57:17,884 INFO client Ответ сервера: {"response": "", "time": 1641481037.883085, "alert": "Hello"}
+2022-01-06 18:03:08,754 INFO client Ответ сервера: {"response": "", "time": 1641481388.7542973, "alert": "Hello"}
+2022-01-06 18:06:33,796 INFO client Ответ сервера: {"response": "", "time": 1641481593.7962444, "alert": "Hello"}

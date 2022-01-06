@@ -1,9 +1,13 @@
 from socket import AF_INET, SOCK_STREAM, socket
 import time
 import json
+import logging
+import log.client_log_config
 
 s = socket(AF_INET, SOCK_STREAM)
 s.connect(('localhost', 8888))
+
+app_log = logging.getLogger('app')
 
 
 def create_presence_msg():
@@ -28,5 +32,7 @@ def receive_server_message():
 
 
 send_message()
-print("Ответ сервера: %s" % receive_server_message().decode('utf-8'))
+receive_message = receive_server_message().decode('utf-8')
+
+app_log.info("Ответ сервера: %s" % receive_message)
 s.close()
