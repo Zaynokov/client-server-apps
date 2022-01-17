@@ -10,6 +10,14 @@ s.connect(('localhost', 8888))
 app_log = logging.getLogger('app')
 
 
+def logger(func):
+    def call(*args, **kwargs):
+        app_log.info(f"{time.time()} Функция {func.__name__} вызвана из функции main")
+        return None
+    return call
+
+
+@logger
 def create_presence_msg():
     message = {
         'action': 'presence',
@@ -18,21 +26,29 @@ def create_presence_msg():
     return message
 
 
+@logger
 def reform_presence_msg():
     return json.dumps(create_presence_msg()).encode('utf-8')
 
 
+@logger
 def send_message():
     s.send(reform_presence_msg())
 
 
+@logger
 def receive_server_message():
     server_msg = s.recv(1024)
     return server_msg
 
 
-send_message()
-receive_message = receive_server_message().decode('utf-8')
+def main():
+    send_message()
+    receive_message = receive_server_message().decode('utf-8')
 
-app_log.info("Ответ сервера: %s" % receive_message)
-s.close()
+    app_log.info("Ответ сервера: %s" % receive_message)
+    s.close()
+
+
+if __name__ == '__main__':
+    main()

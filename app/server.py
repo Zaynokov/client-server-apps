@@ -11,6 +11,14 @@ s.listen(5)
 app_log = logging.getLogger('app')
 
 
+def logger(func):
+    def call(*args, **kwargs):
+        app_log.info(f"{time.time()} Функция {func.__name__} вызвана из функции main")
+        return None
+    return call
+
+
+@logger
 def create_response_msg():
     response = {
         'response': '',
@@ -20,14 +28,17 @@ def create_response_msg():
     return response
 
 
+@logger
 def reform_response_msg():
     return json.dumps(create_response_msg()).encode('utf-8')
 
 
+@logger
 def send_server_response():
     client.send(reform_response_msg())
 
 
+@logger
 def receive_client_message():
     client_msg = client.recv(1024)
     return client_msg
